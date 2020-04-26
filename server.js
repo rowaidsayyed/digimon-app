@@ -63,7 +63,7 @@ function getfavorite(req,res){
   let sql = 'INSERT INTO digimonsTable (name,image,level) VALUES ($1,$2,$3);';
   let values = [name,img,level];
   client.query(sql,values)
-    .then(data => {
+    .then(() => {
       res.redirect('/favorite');
     });
 }
@@ -79,12 +79,10 @@ function allfavorite(req,res){
 
 
 function detailsfunc(req,res){
-  // console.log(req.params,'detailssssssss');
   let values = [req.params.diId];
   let sql = 'SELECT * FROM digimonsTable WHERE id=$1;';
   client.query(sql,values)
     .then(results => {
-      // console.log(results.rows);
       res.render('pages/details',{data:results.rows});
     });
 }
