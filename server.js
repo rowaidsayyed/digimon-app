@@ -25,10 +25,7 @@ app.put('/update/:diId',updatefunc);
 
 /******************************************************************************************************* */
 function updatefunc(req,res){
-  console.log(req.params,'uppppp');
-  console.log(req.body);
   let {name,level,img}=req.body;
-  console.log(name,level,img); 
   let sql = 'UPDATE digimonsTable SET name=$1,image=$2,level=$3 WHERE id=$4;';
   let values = [name,img,level,req.params.diId];
   client.query(sql,values)
@@ -49,6 +46,7 @@ function deletedunc(req,res){
 }
 
 function getIndex(req,res){
+  allDigimons =[];
   let url = 'https://digimon-api.herokuapp.com/api/digimon';
   superagent.get(url)
     .then(data => {
@@ -61,7 +59,6 @@ function getIndex(req,res){
 
 function getfavorite(req,res){
   let favoritedigimonID = req.params.diId;
-  // console.log(favoritedigimonID,allDigimons[favoritedigimonID],'addddd');
   let {name,img,level} = allDigimons[favoritedigimonID];
   let sql = 'INSERT INTO digimonsTable (name,image,level) VALUES ($1,$2,$3);';
   let values = [name,img,level];
