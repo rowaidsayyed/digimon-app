@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main>
+    <% data.forEach((e,idx) => { %>
+      <div> 
+        <h2><%=e.name%></h2>
+        <h3><%=e.level%></h3>
+        <img src="<%=e.image%>" alt="<%=e.name%>">    
+        <form action="/delete/<%=e.id%>?_method=DELETE" method="post">
+          <button>delete</button>  
+        </form>
+        <form class='updateForm' action="/update/<%=e.id%>?_method=PUT" method="post">
+
+          <input type="text" name='name' value="<%=e.name%>">
+          <input type="text" name= 'level' value="<%=e.level%>">
+          <input type="text" name='img' value="<%=e.image%>">
+          <button> update </button>
+        </form>
+      </div>
+    <% });%> 
+  </main>
+</body>
+</html>
